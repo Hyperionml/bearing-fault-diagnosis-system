@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: bearing-fault-diagnosis-system
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_bearing
+    username: root
+    password: 1234
+server:
+  port: 10001
+mybatis:
+  type-aliases-package: com.hyperionml.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.hyperionml.mapper: debug
