@@ -15,3 +15,8 @@ mybatis:
 logging:
   level:
     com.hyperionml.mapper: debug
+pagehelper:
+  helper-dialect: mysql # 指定分页数据库类型（方言）
+  reasonable: true # 合理查询超过最大页，则查询最后一页
+  propertyName: propertyValue
+  defaultCount: true # 分页插件默认参数支持 default-count 形式，自定义扩展的参数，必须大小写一致
