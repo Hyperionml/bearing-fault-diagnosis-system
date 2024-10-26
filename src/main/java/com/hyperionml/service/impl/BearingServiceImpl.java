@@ -11,6 +11,7 @@ import com.hyperionml.service.BearingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,11 +43,15 @@ public class BearingServiceImpl implements BearingService {
 
     @Override
     public Result addNewHistoryStatus(int sid) {
-        HistoryStatus status = new HistoryStatus();
+        HistoryStatus status = bearingMapper.selectHisStaBySidAndDatetime(sid, LocalDate.now());
+        if(status != null){
+            return Result.err("今日的当前轴承历史记录已存在，无需添加");
+        }
+        status = new HistoryStatus();
         status.setSid(sid);
         status.setErrCount(0);
         status.setErrMsg(null);
-        status.setDate(LocalDate.now());
+        status.setDatetime(LocalDate.now());
         int code = bearingMapper.insertHisSta(status);
         if(code != 0){
             return Result.success("成功更新历史数据");
@@ -59,6 +64,7 @@ public class BearingServiceImpl implements BearingService {
     @Override
     public Result updateHistoryStatusBy1(int sid, String msg){
         HistoryStatus status = bearingMapper.selectHisStaBySidAndDatetime(sid, LocalDate.now());
+        if(status == null) return Result.err("当前轴承的今日历史数据还未创建");
         status.setErrCount(status.getErrCount() + 1);
         status.setErrMsg(status.getErrMsg() + ", " + msg);
         int code = bearingMapper.updateHisSta(status);

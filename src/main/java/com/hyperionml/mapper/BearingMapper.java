@@ -26,6 +26,7 @@ public interface BearingMapper {
             "values (#{sid}, #{errCount}, #{errMsg}, #{datetime})")
     int insertHisSta(HistoryStatus historyStatus);
 
+
     @Update("update db_bearing.history_status set err_count = #{errCount}, err_msg = #{errMsg} " +
             "where sid = #{sid} and datetime = #{datetime}")
     int updateHisSta(HistoryStatus historyStatus);

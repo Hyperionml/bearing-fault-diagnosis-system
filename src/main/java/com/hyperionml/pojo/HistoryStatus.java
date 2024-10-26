@@ -14,5 +14,5 @@ public class HistoryStatus {
     private int sid;
     private int errCount;
     private String errMsg;
-    private LocalDate date;
+    private LocalDate datetime;
 }

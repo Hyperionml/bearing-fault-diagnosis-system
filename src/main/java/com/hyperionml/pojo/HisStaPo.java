@@ -15,5 +15,5 @@ public class HisStaPo {
     private String sname;
     private int errCount;
     private String errMsg;
-    private LocalDate date;
+    private LocalDate datetime;
 }
